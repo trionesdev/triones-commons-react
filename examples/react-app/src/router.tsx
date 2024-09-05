@@ -16,7 +16,8 @@ export const routes: RouteObject[] = [
     {
         path: () => "/security",
         element: <SecurityPage/>,
-        policy: "security"
+        policy: "security",
+        unauthorized: <div>未授权</div>,
     }
 ]
 
