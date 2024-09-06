@@ -5,6 +5,20 @@
     "packages/*",
     "examples/*"
   ],
+  "scripts": {
+    "clean": "lerna clean",
+    "check:types": "tsc --project tsconfig.json --noEmit",
+    "build": "lerna run build",
+    "preversion": "yarn run build",
+    "version:beta": "lerna version prerelease --preid beta",
+    "release:github": "ts-node scripts/release release",
+    "release:force": "lerna publish from-package --yes ",
+    "prelease:force": "lerna publish from-package --yes --dist-tag next",
+    "release": "lerna publish",
+    "codingPublish": "lerna publish",
+    "format": "prettier --write \"**/*.{ts,tsx,js,json,css,less}\"",
+    "prepare": "husky install"
+  },
   "dependencies": {},
   "devDependencies": {
     "lerna": "^8.1.8"
