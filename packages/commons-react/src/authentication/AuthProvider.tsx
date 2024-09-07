@@ -3,6 +3,9 @@ import {AuthContext} from "./context";
 
 type AuthProviderProps = {
     children: React.ReactElement;
+    /**
+     * 认证请求, 可以根据token去获取当前用户信息，如果没有token可以直接返回null
+     */
     authRequest?: () => Promise<any>;
     onUnAuthenticated?: () => void;
 };
