@@ -38,7 +38,7 @@ export const PermissionProvider: FC<PermissionProviderProps> = ({
     const {authSynced, authenticated} = useAuth();
     const [policySynced, setPolicySynced] = useState(false);
     const [master, setMaster] = useState(false);
-    const [permissions, setPermissions] = useState<any[]>([]);
+    const [permissions, setPermissions] = useState<any[] | undefined>([]);
 
     /**
      * 鉴权,如果有自定义鉴权 customAuthenticate，则使用自定义鉴权，否则使用默认鉴权
@@ -49,7 +49,7 @@ export const PermissionProvider: FC<PermissionProviderProps> = ({
             return false;
         }
         if (customAuthenticate) {
-            return customAuthenticate(permissionFilter, permissions);
+            return customAuthenticate(permissionFilter, permissions || []);
         } else {
             let permissionFiler = permissionTransform(permissionFilter);
             return _.some(permissions, (permission: any) => {
