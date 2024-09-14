@@ -18,10 +18,10 @@ type PermissionProviderProps = {
     permissionTransform?: (policy: any | any[]) => any;
     /**
      * 自定义鉴权
-     * @param policy 需要的权限
-     * @param policies 当前用户拥有的权限策略
+     * @param permission 需要的权限
+     * @param permissions 当前用户拥有的权限策略
      */
-    customAuthenticate?: (policy: any | any[], policies: any[]) => boolean;
+    customAuthenticate?: (permission: any | any[], permissions: any[]) => boolean;
     unauthorized?: React.ReactElement | React.ReactNode; //未授权时的内容
     onUnauthorized?: () => void; //未授权时的回调
 };
