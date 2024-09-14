@@ -10,12 +10,12 @@ type PermissionProviderProps = {
      * 权限请求，返回一个PolicyResponse
      * @param params
      */
-    permissionRequest?: (params?: any) => Promise<PolicyResponse>;
+    policyRequest?: (params?: any) => Promise<PolicyResponse>;
     /**
      * 权限转换，默认为拼接成字符串，例如参数是["a"]，则返回"a"，参数为["a","b"],则返回"a::b"，当配置customAuthenticate 时，该参数无效
      * @param policy
      */
-    policyTransform?: (policy: any | any[]) => any;
+    permissionTransform?: (policy: any | any[]) => any;
     /**
      * 自定义鉴权
      * @param policy 需要的权限
@@ -27,9 +27,9 @@ type PermissionProviderProps = {
 };
 export const PermissionProvider: FC<PermissionProviderProps> = ({
                                                                     children,
-                                                                    permissionRequest,
-                                                                    policyTransform = (policy) => {
-                                                                        return _.concat([], policy).join("::");
+                                                                    policyRequest,
+                                                                    permissionTransform = (permission) => {
+                                                                        return _.concat([], permission).join("::");
                                                                     },
                                                                     customAuthenticate,
                                                                     unauthorized,
@@ -38,22 +38,22 @@ export const PermissionProvider: FC<PermissionProviderProps> = ({
     const {authSynced, authenticated} = useAuth();
     const [policySynced, setPolicySynced] = useState(false);
     const [master, setMaster] = useState(false);
-    const [policies, setPolicies] = useState<any[]>([]);
+    const [permissions, setPermissions] = useState<any[]>([]);
 
     /**
      * 鉴权,如果有自定义鉴权 customAuthenticate，则使用自定义鉴权，否则使用默认鉴权
-     * @param policyFilter
+     * @param permissionFilter
      */
-    const handleAuthenticate = (policyFilter: any | any[]) => {
+    const handleAuthenticate = (permissionFilter: any | any[]) => {
         if (!policySynced) {
             return false;
         }
         if (customAuthenticate) {
-            return customAuthenticate(policyFilter, policies);
+            return customAuthenticate(permissionFilter, permissions);
         } else {
-            let policyFiler = policyTransform(policyFilter);
-            return _.some(policies, (policy: any) => {
-                return policy === policyFiler;
+            let permissionFiler = permissionTransform(permissionFilter);
+            return _.some(permissions, (permission: any) => {
+                return permission === permissionFiler;
             });
         }
 
@@ -61,11 +61,11 @@ export const PermissionProvider: FC<PermissionProviderProps> = ({
 
     useEffect(() => {
         if (authSynced && authenticated) {
-            if (permissionRequest) {
-                permissionRequest?.()
+            if (policyRequest) {
+                policyRequest?.()
                     .then((res: PolicyResponse) => {
                         setMaster?.(res.master || false);
-                        setPolicies?.(res.policies || []);
+                        setPermissions?.(res.permissions || []);
                     })
                     .finally(() => {
                         setPolicySynced(true);
@@ -83,8 +83,8 @@ export const PermissionProvider: FC<PermissionProviderProps> = ({
                 master,
                 setMaster,
                 authenticate: handleAuthenticate,
-                policies,
-                setPolicies,
+                permissions,
+                setPermissions,
                 unauthorized,
                 onUnauthorized
             }}>

@@ -5,8 +5,8 @@ export interface PermissionContextProps {
   master?: boolean; //super管理员
   setMaster?: (value: boolean) => void;
   authenticate?: (policy: string | any[]) => boolean; //鉴权
-  policies?: any[];
-  setPolicies?: (policies: any[]) => void;
+  permissions?: any[];
+  setPermissions?: (policies: any[]) => void;
   unauthorized?: React.ReactElement | React.ReactNode; //未授权时的内容
   onUnauthorized?: () => void; //未授权时的回调
 }

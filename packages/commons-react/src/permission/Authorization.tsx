@@ -22,7 +22,7 @@ export const Authorization: FC<AuthorizationProps> = ({
     } else {
         let authorized: boolean
         if (authenticate) {
-            authorized = authenticate?.(permission.policies)
+            authorized = authenticate?.(permission.permissions)
         } else {
             authorized = permission.authenticate?.(policy) || false
         }

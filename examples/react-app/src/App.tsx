@@ -10,7 +10,7 @@ function App() {
                 console.log("onUnAuthenticated");
                 window.location.href = "/#/sign-in";
             }}>
-                <PermissionProvider permissionRequest={() => Promise.resolve({master: false, policies: ["security"]})}>
+                <PermissionProvider policyRequest={() => Promise.resolve({master: false, permissions: ["security"]})}>
                     <AppRouter/>
                 </PermissionProvider>
             </AuthProvider>
