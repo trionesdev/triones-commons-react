@@ -3,38 +3,47 @@ import {usePermission} from "./use-permission";
 
 type AuthorizationProps = {
     children?: React.ReactNode;
-    policy?: string | string[]; //鉴权需要的策略
-    authenticate?: (policies?: any[]) => boolean; //自定义鉴权
-    unauthorized?: React.ReactElement | React.ReactNode; //未授权时的内容
+    permission?: string | string[]; //鉴权需要的权限
+    authenticate?: (permission?: string | string[]) => boolean; //自定义鉴权
+    unauthorized?: React.ReactNode | React.ReactElement; //未授权时的内容
     onUnauthorized?: () => void; //未授权时的回调
 };
 export const Authorization: FC<AuthorizationProps> = ({
                                                           children,
-                                                          policy = [],
+                                                          permission,
                                                           authenticate,
                                                           unauthorized,
                                                           onUnauthorized
                                                       }) => {
-    const permission = usePermission();
+    const permissionHooks = usePermission();
 
-    if (!permission.policySynced) {
+    if (!permissionHooks.policySynced) {
         return null
     } else {
         let authorized: boolean
         if (authenticate) {
-            authorized = authenticate?.(permission.permissions)
+            authorized = authenticate?.(permissionHooks.permissions)
         } else {
-            authorized = permission.authenticate?.(policy) || false
+            authorized = permissionHooks.authenticate?.(permission!) || false
         }
         if (authorized) {
             return <>{children}</>
         } else {
             if (onUnauthorized) {
                 onUnauthorized()
-            } else if (permission.onUnauthorized) {
-                permission.onUnauthorized()
+            } else if (permissionHooks.onUnauthorized) {
+                permissionHooks.onUnauthorized()
             }
-            return unauthorized ?? permission.unauthorized ?? null
+            if (unauthorized) {
+                return <>{unauthorized}</>
+            } else {
+                if (permissionHooks.unauthorized) {
+                    return null
+                } else {
+                    return <>{permissionHooks.unauthorized}</>
+                }
+            }
         }
     }
+
 };

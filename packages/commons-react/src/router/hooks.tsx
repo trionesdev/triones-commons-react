@@ -10,13 +10,13 @@ export const routesConvert = (routes: TrionesRouteObject[]): RouteObject[] => {
         }
         if (route.policy) {
             if (route.element) {
-                route.element = <Authorization policy={route.policy} unauthorized={route.unauthorized}
+                route.element = <Authorization permission={route.permission} unauthorized={route.unauthorized}
                                                onUnauthorized={route.onUnauthorized}>{route.element}</Authorization>;
             }
             if (route.Component) {
                 let Component = route.Component;
                 route.Component = () => (
-                    <Authorization policy={route.policy} unauthorized={route.unauthorized}
+                    <Authorization permission={route.policy} unauthorized={route.unauthorized}
                                    onUnauthorized={route.onUnauthorized}>
                         <Component/>
                     </Authorization>

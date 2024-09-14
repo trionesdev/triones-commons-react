@@ -17,9 +17,9 @@ export type RouteItem = {
      */
     anonymous?: boolean;
     /**
-     * 权限策略
+     * 权限
      */
-    policy?: string | string[];
+    permission?: string | string[];
     /**
      * 未授权时的内容
      */

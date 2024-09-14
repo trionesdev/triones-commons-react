@@ -4,9 +4,9 @@ export interface PermissionContextProps {
   policySynced?: boolean; //策略是否同步
   master?: boolean; //super管理员
   setMaster?: (value: boolean) => void;
-  authenticate?: (policy: string | any[]) => boolean; //鉴权
+  authenticate?: (permission: string | string[]) => boolean; //鉴权
   permissions?: any[];
-  setPermissions?: (policies: any[]) => void;
+  setPermissions?: (permissions?: any[]) => void;
   unauthorized?: React.ReactElement | React.ReactNode; //未授权时的内容
   onUnauthorized?: () => void; //未授权时的回调
 }
