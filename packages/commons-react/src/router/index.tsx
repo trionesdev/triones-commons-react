@@ -1,5 +1,5 @@
 import {trionesCreateBrowserRouter, trionesCreateHashRouter} from "./hooks";
-import {RouteItem, TrionesRouteObject} from "./route-object";
+import {RouteItem, TrionesRouteObject} from "./RouteObject";
 import {RouterProvider, Outlet,Link, useNavigate} from "react-router-dom"
 
 export type {RouteItem, TrionesRouteObject as RouteObject};
