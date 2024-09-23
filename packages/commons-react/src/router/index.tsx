@@ -61,7 +61,6 @@ import {
     ShouldRevalidateFunctionArgs,
     To,
     UIMatch,
-    unstable_HandlerResult,
     unstable_PatchRoutesOnNavigationFunction,
     //-- type
     //-----------------
@@ -184,7 +183,6 @@ export type {
     ShouldRevalidateFunctionArgs,
     To,
     UIMatch,
-    unstable_HandlerResult,
     unstable_PatchRoutesOnNavigationFunction,
     //---
     RouteItem, TrionesRouteObject as RouteObject
