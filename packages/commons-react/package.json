@@ -8,7 +8,10 @@
     "dev": "father dev",
     "build": "father build",
     "build:deps": "father prebundle",
-    "prepublishOnly": "father doctor && npm run build"
+    "prepublishOnly": "father doctor && npm run build",
+    "publish": "npm publish --registry=https://registry.npmjs.org/",
+    "publishOnly": "npm publish --ignore-scripts --registry=https://registry.npmjs.org/",
+    "triones:publishOnly": "npm publish --ignore-scripts --registry=https://moensun-npm.pkg.coding.net/npm/moensun/"
   },
   "keywords": [],
   "authors": [
@@ -34,5 +37,5 @@
     "@types/react-dom": "^18.0.11",
     "father": "^4.5.1-beta.4"
   },
-  "gitHead": "5c8f6495b666c060f51cfd51f56cdf78f7faad7a"
+  "gitHead": "6745dc5388119b23e3663b3c1a530df66eb74ccf"
 }

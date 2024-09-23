@@ -16,9 +16,6 @@
     "prelease:force": "lerna publish from-package --yes --dist-tag next",
     "release": "lerna publish --registry=https://registry.npmjs.org/",
     "format": "prettier --write \"**/*.{ts,tsx,js,json,css,less}\"",
-    "publish": "npm publish --registry=https://registry.npmjs.org/",
-    "publishOnly": "npm publish --ignore-scripts --registry=https://registry.npmjs.org/",
-    "triones:publishOnly": "npm publish --ignore-scripts --registry=https://moensun-npm.pkg.coding.net/npm/moensun/"
   },
   "dependencies": {},
   "devDependencies": {
