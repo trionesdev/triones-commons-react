@@ -15,7 +15,7 @@
     "release:force": "lerna publish from-package --yes --registry=https://registry.npmjs.org/",
     "prelease:force": "lerna publish from-package --yes --dist-tag next",
     "release": "lerna publish --registry=https://registry.npmjs.org/",
-    "format": "prettier --write \"**/*.{ts,tsx,js,json,css,less}\"",
+    "format": "prettier --write \"**/*.{ts,tsx,js,json,css,less}\""
   },
   "dependencies": {},
   "devDependencies": {
