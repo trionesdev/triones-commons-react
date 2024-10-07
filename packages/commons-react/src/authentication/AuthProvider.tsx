@@ -8,9 +8,10 @@ type AuthProviderProps = {
      */
     authRequest?: () => Promise<any>;
     onUnAuthenticated?: () => void;
+    onSignOut?: () => void;
 };
 
-export const AuthProvider: FC<AuthProviderProps> = ({children, authRequest, onUnAuthenticated}) => {
+export const AuthProvider: FC<AuthProviderProps> = ({children, authRequest, onUnAuthenticated, onSignOut}) => {
     const [authSynced, setAuthSynced] = useState(false);
     const [authenticated, setAuthenticated] = useState(false);
     const [actor, setActor] = useState<any>();
@@ -42,6 +43,15 @@ export const AuthProvider: FC<AuthProviderProps> = ({children, authRequest, onUn
         setActor(actor);
     };
 
+    const handleSignOut = () => {
+        if (onSignOut) {
+            onSignOut()
+        } else {
+            setAuthSynced(false)
+            setAuthenticated(false)
+            setActor(null)
+        }
+    }
 
     return (
         <AuthContext.Provider
@@ -51,6 +61,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({children, authRequest, onUn
                 actor,
                 setActor: handleSetActor,
                 onUnAuthenticated,
+                signOut: handleSignOut
             }}>
             {children}
         </AuthContext.Provider>

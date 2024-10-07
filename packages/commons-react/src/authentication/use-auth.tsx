@@ -7,7 +7,8 @@ export const useAuth = (): {
     actor?: any;
     setActor?: (actor: any) => void;
     onUnAuthenticated?: () => void;
+    signOut?: () => void;
 } => {
-    const {authSynced, authenticated, actor, setActor, onUnAuthenticated} = useContext(AuthContext);
-    return {authSynced, authenticated, actor, setActor, onUnAuthenticated};
+    const {authSynced, authenticated, actor, setActor, onUnAuthenticated, signOut} = useContext(AuthContext);
+    return {authSynced, authenticated, actor, setActor, onUnAuthenticated, signOut};
 };
