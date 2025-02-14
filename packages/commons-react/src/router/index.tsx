@@ -3,16 +3,12 @@ import {RouteItem, TrionesRouteObject} from "./RouteObject";
 
 import {
     //--- type
-    unstable_DataStrategyFunction,
-    unstable_DataStrategyFunctionArgs,
-    unstable_DataStrategyMatch,
     FormEncType,
     FormMethod,
     GetScrollRestorationKeyFunction,
     ParamKeyValuePair,
     SubmitOptions,
     URLSearchParamsInit,
-    V7_FormMethod,
     //---
     ActionFunction,
     ActionFunctionArgs,
@@ -23,11 +19,8 @@ import {
     DataRouteObject,
     ErrorResponse,
     Fetcher,
-    FutureConfig,
-    Hash,
     IndexRouteObject,
     IndexRouteProps,
-    JsonFunction,
     LazyRouteFunction,
     LayoutRouteProps,
     LoaderFunction,
@@ -45,7 +38,6 @@ import {
     ParamParseKey,
     Path,
     PathMatch,
-    Pathname,
     PathParam,
     PathPattern,
     PathRouteProps,
@@ -56,12 +48,10 @@ import {
     RouterProps,
     RouterProviderProps,
     RoutesProps,
-    Search,
     ShouldRevalidateFunction,
     ShouldRevalidateFunctionArgs,
     To,
     UIMatch,
-    unstable_PatchRoutesOnNavigationFunction,
     //-- type
     //-----------------
     RouterProvider,
@@ -74,7 +64,7 @@ import {
     useFetcher,
     useFetchers,
     //----
-    AbortedDeferredError,
+
     Await,
     MemoryRouter,
     Navigate,
@@ -87,10 +77,8 @@ import {
     createPath,
     createRoutesFromChildren,
     createRoutesFromElements,
-    defer,
     isRouteErrorResponse,
     generatePath,
-    json,
     matchPath,
     matchRoutes,
     parsePath,
@@ -121,20 +109,16 @@ import {
     useRouteLoaderData,
     useRoutes,
 
-} from "react-router-dom"
+} from "react-router"
 
 
 export type {
-    unstable_DataStrategyFunction,
-    unstable_DataStrategyFunctionArgs,
-    unstable_DataStrategyMatch,
     FormEncType,
     FormMethod,
     GetScrollRestorationKeyFunction,
     ParamKeyValuePair,
     SubmitOptions,
     URLSearchParamsInit,
-    V7_FormMethod,
     //---
     ActionFunction,
     ActionFunctionArgs,
@@ -145,11 +129,8 @@ export type {
     DataRouteObject,
     ErrorResponse,
     Fetcher,
-    FutureConfig,
-    Hash,
     IndexRouteObject,
     IndexRouteProps,
-    JsonFunction,
     LazyRouteFunction,
     LayoutRouteProps,
     LoaderFunction,
@@ -167,7 +148,6 @@ export type {
     ParamParseKey,
     Path,
     PathMatch,
-    Pathname,
     PathParam,
     PathPattern,
     PathRouteProps,
@@ -178,12 +158,10 @@ export type {
     RouterProps,
     RouterProviderProps,
     RoutesProps,
-    Search,
     ShouldRevalidateFunction,
     ShouldRevalidateFunctionArgs,
     To,
     UIMatch,
-    unstable_PatchRoutesOnNavigationFunction,
     //---
     RouteItem, TrionesRouteObject as RouteObject
 };
@@ -198,7 +176,6 @@ export {
     useFetcher,
     useFetchers,
     //----
-    AbortedDeferredError,
     Await,
     MemoryRouter,
     Navigate,
@@ -211,10 +188,8 @@ export {
     createPath,
     createRoutesFromChildren,
     createRoutesFromElements,
-    defer,
     isRouteErrorResponse,
     generatePath,
-    json,
     matchPath,
     matchRoutes,
     parsePath,
