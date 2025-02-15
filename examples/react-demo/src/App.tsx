@@ -1,4 +1,3 @@
-import React from 'react';
 import './App.css';
 import {AppRouter} from "./router";
 import {AuthProvider, PermissionProvider} from "@trionesdev/commons-react";

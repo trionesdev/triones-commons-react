@@ -1,5 +1,5 @@
 import {TrionesRouteObject} from "./RouteObject";
-import {createBrowserRouter, createHashRouter, RouteObject} from "react-router-dom";
+import {createBrowserRouter, createHashRouter, RouteObject} from "react-router";
 import {Authorization} from "../permission";
 import {Authentication} from "../authentication";
 

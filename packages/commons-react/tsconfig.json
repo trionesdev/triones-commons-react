@@ -5,6 +5,9 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "jsx": "react-jsx",
-    "baseUrl": "./"
+    "baseUrl": "./",
+    "lib": ["ES2023"],
+    "module": "ESNext",
+    "moduleResolution": "bundler"
   }
 }
