@@ -1,7 +1,7 @@
 {
   "name": "react-demo",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1-beta.5",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -10,9 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@trionesdev/commons-react": "workspace:*",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "@trionesdev/commons-react": "workspace:*"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",
