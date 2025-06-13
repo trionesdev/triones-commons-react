@@ -1,4 +1,4 @@
-import React, {FC, useCallback, useEffect, useState} from "react";
+import React, {FC, useEffect, useState} from "react";
 import _ from "lodash";
 import {PermissionContext} from "./context";
 import {PolicyResponse} from "./types";
@@ -44,7 +44,7 @@ export const PermissionProvider: FC<PermissionProviderProps> = ({
      * 鉴权,如果有自定义鉴权 customAuthenticate，则使用自定义鉴权，否则使用默认鉴权
      * @param permissionFilter
      */
-    const handleAuthenticate = useCallback((permissionFilter: any | any[]) => {
+    const handleAuthenticate = (permissionFilter: any | any[]) => {
         if (!policySynced) {
             return false;
         }
@@ -57,7 +57,7 @@ export const PermissionProvider: FC<PermissionProviderProps> = ({
             });
         }
 
-    },[]);
+    };
 
     useEffect(() => {
         if (authSynced && authenticated) {
