@@ -1,4 +1,4 @@
-import {Link, useAuth} from "@trionesdev/commons-react";
+import {Link, useAuth} from "@trionesdev/commons-react/src";
 
 
 export const DashboardPage = () => {
@@ -6,6 +6,11 @@ export const DashboardPage = () => {
     return <div>
         <h1>Dashboard</h1>
         <div>当前用户：{actor.username}</div>
-        <Link to={"/security"}>Security</Link>
+        <div>
+            <Link to={"/security"}>Security</Link>
+        </div>
+        <div>
+            <Link to={"/permission"}>Permission</Link>
+        </div>
     </div>
 }

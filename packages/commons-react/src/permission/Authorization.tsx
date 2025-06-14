@@ -1,19 +1,28 @@
 import React, {FC} from "react";
 import {usePermission} from "./use-permission";
+import {Mode} from "./types";
 
 type AuthorizationProps = {
     children?: React.ReactNode;
-    permission?: string | string[]; //鉴权需要的权限
+    value?: string | string[]; //鉴权需要的权限
     authenticate?: (permission?: string | string[]) => boolean; //自定义鉴权
-    unauthorized?: React.ReactNode | React.ReactElement; //未授权时的内容
+    /**
+     * 未授权时的内容
+     */
+    unauthorized?: React.ReactNode | React.ReactElement;
     onUnauthorized?: () => void; //未授权时的回调
+    /**
+     * mode:鉴权模式，and:必须同时拥有权限，or:只要拥有其中一个权限即可
+     */
+    mode?: Mode
 };
 export const Authorization: FC<AuthorizationProps> = ({
                                                           children,
-                                                          permission,
+                                                          value,
                                                           authenticate,
                                                           unauthorized,
-                                                          onUnauthorized
+                                                          onUnauthorized,
+                                                          mode = 'and'
                                                       }) => {
     const permissionHooks = usePermission();
 
@@ -24,7 +33,7 @@ export const Authorization: FC<AuthorizationProps> = ({
         if (authenticate) {
             authorized = authenticate?.(permissionHooks.permissions)
         } else {
-            authorized = permissionHooks.authenticate?.(permission!) || false
+            authorized = permissionHooks.authenticate?.(value!,  mode) || false
         }
         if (authorized) {
             return <>{children}</>

@@ -1,4 +1,4 @@
-import {useAuth, useNavigate} from "@trionesdev/commons-react";
+import {useAuth, useNavigate} from "@trionesdev/commons-react/src";
 
 export const SignInPage = () => {
     const navigate = useNavigate()

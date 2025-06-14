@@ -1,4 +1,4 @@
-import {useMatches} from "@trionesdev/commons-react";
+import {useMatches} from "@trionesdev/commons-react/src";
 export const SecurityPage = () => {
     console.log(useMatches())
     return <div>
