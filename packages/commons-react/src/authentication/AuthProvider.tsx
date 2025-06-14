@@ -23,7 +23,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({children, authRequest, onUn
                     setAuthenticated(!!res);
                     setActor(res || null);
                 })
-                .catch((err) => {
+                .catch(() => {
                     setAuthenticated(false);
                     setActor(null);
                 })
