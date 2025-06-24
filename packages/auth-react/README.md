@@ -1,7 +1,7 @@
-# @trionesdev/commons-react
+# @trionesdev/auth-react
 
-[![NPM version](https://img.shields.io/npm/v/@trionesdev/commons-react.svg?style=flat)](https://npmjs.com/package/@trionesdev/commons-react)
-[![NPM downloads](http://img.shields.io/npm/dm/@trionesdev/commons-react.svg?style=flat)](https://npmjs.com/package/@trionesdev/commons-react)
+[![NPM version](https://img.shields.io/npm/v/@trionesdev/auth-react.svg?style=flat)](https://npmjs.com/package/@trionesdev/commons-react)
+[![NPM downloads](http://img.shields.io/npm/dm/@trionesdev/auth-react.svg?style=flat)](https://npmjs.com/package/@trionesdev/commons-react)
 
 ## Install
 
@@ -22,7 +22,8 @@ TODO
 
 MIT
 
-## 互相吹捧，共同进步
+## 关注我们，一起交流
+> 留言回复不及时，可以通过关注公众号联系我们
 
 <div style="width: 100%;text-align: center;">
 <img src="../../images/shuque_wx.jpg" width="200px" alt="">
