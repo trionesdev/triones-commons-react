@@ -10,7 +10,7 @@ export const DashboardPage = () => {
             <Link to={"/security"}>Security</Link>
         </div>
         <div>
-            <Link to={"/permission"}>Permission</Link>
+            <Link to={"/authorization"}>Permission</Link>
         </div>
     </div>
 }

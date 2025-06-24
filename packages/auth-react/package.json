@@ -1,0 +1,43 @@
+{
+  "name": "@trionesdev/auth-react",
+  "version": "0.0.1-beta.7",
+  "description": "triones auth react",
+  "module": "dist/esm/index.js",
+  "types": "dist/esm/index.d.ts",
+  "scripts": {
+    "dev": "father dev",
+    "build": "father build",
+    "build:deps": "father prebundle",
+    "prepublishOnly": "father doctor && npm run build",
+    "publish": "npm publish --registry=https://registry.npmjs.org/",
+    "publishOnly": "npm publish --ignore-scripts --registry=https://registry.npmjs.org/",
+    "triones:publishOnly": "npm publish --ignore-scripts --registry=https://moensun-npm.pkg.coding.net/npm/moensun/"
+  },
+  "keywords": [],
+  "authors": [
+    "bane@moensun.com"
+  ],
+  "license": "MIT",
+  "files": [
+    "dist",
+    "compiled"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "react-router": "^7.1.5"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.191",
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
+    "father": "^4.5.3"
+  },
+  "gitHead": "994ca90ea13c16267019f9d4107a0203b7def33a"
+}

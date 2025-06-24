@@ -21,7 +21,7 @@ export const routes: RouteObject[] = [
         unauthorized: <div>未授权</div>,
     },
     {
-        path: () => '/permission',
+        path: () => '/authorization',
         element: <PermissionPage/>,
     }
 ]
