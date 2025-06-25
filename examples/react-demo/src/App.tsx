@@ -1,18 +1,18 @@
 import './App.css';
 import {AppRouter} from "./router";
-import {AuthProvider, PermissionProvider} from "@trionesdev/commons-react/src";
+import {AuthenticationProvider, AuthorizationProvider} from "@trionesdev/auth-react/src";
 
 function App() {
     return (
         <div>
-            <AuthProvider authRequest={() => Promise.resolve(false)} onUnAuthenticated={() => {
+            <AuthenticationProvider authenticationRequest={() => Promise.resolve(false)} onUnAuthenticated={() => {
                 console.log("onUnAuthenticated");
                 window.location.href = "/#/sign-in";
             }}>
-                <PermissionProvider policyRequest={() => Promise.resolve({master: false, permissions: ["security","create","update"]})}>
+                <AuthorizationProvider authorizationRequest={() => Promise.resolve({master: false, permissions: ["security","create","update"]})}>
                     <AppRouter/>
-                </PermissionProvider>
-            </AuthProvider>
+                </AuthorizationProvider>
+            </AuthenticationProvider>
         </div>
     );
 }

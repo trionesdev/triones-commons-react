@@ -1,3 +1,3 @@
 export * from "./Authentication";
-export * from "./AuthProvider";
-export * from "./use-auth";
+export * from "./AuthenticationProvider";
+export * from "./use-authentication";

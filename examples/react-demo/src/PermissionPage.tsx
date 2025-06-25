@@ -1,4 +1,4 @@
-import {Authorization} from "@trionesdev/commons-react/src";
+import {Authorization} from "@trionesdev/auth-react/src";
 
 export const PermissionPage = () => {
     return <div>

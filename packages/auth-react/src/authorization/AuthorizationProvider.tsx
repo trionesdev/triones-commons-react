@@ -2,7 +2,7 @@ import React, {FC, useEffect, useState} from "react";
 import _ from "lodash";
 import {AuthorizationContext} from "./context";
 import {AuthorizationResponse, Mode } from "./types";
-import {useAuth} from "../authentication";
+import {useAuthentication} from "../authentication";
 
 type PermissionProviderProps = {
     children?: React.ReactNode;
@@ -35,7 +35,7 @@ export const AuthorizationProvider: FC<PermissionProviderProps> = ({
                                                                     unauthorized,
                                                                     onUnauthorized
                                                                 }) => {
-    const {authSynced, authenticated} = useAuth(); //鉴权是否同步
+    const {authenticationSynced, authenticated} = useAuthentication(); //鉴权是否同步
     const [authorizationSynced, setAuthorizationSynced] = useState(false); //策略是否同步
     const [master, setMaster] = useState(false);
     const [permissions, setPermissions] = useState<any[] | undefined>([]); //全部权限
@@ -78,7 +78,7 @@ export const AuthorizationProvider: FC<PermissionProviderProps> = ({
     };
 
     useEffect(() => {
-        if (authSynced && authenticated) {
+        if (authenticationSynced && authenticated) {
             if (authorizationRequest) {
                 authorizationRequest?.()
                     .then((res: AuthorizationResponse) => {
@@ -92,7 +92,7 @@ export const AuthorizationProvider: FC<PermissionProviderProps> = ({
                 setAuthorizationSynced(true);
             }
         }
-    }, [authSynced, authenticated]);
+    }, [authenticationSynced, authenticated]);
 
     return (
         <AuthorizationContext.Provider

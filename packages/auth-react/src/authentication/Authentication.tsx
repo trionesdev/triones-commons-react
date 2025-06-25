@@ -1,11 +1,11 @@
 import React, {FC, useEffect} from "react";
-import {useAuth} from "./use-auth";
+import {useAuthentication} from "./use-authentication";
 
-type AuthenticatedProps = {
+type AuthenticationProps = {
     children?: React.ReactElement;
 };
-export const Authentication: FC<AuthenticatedProps> = ({children}) => {
-    const {authSynced, authenticated, onUnAuthenticated} = useAuth();
+export const Authentication: FC<AuthenticationProps> = ({children}) => {
+    const {authSynced, authenticated, onUnAuthenticated} = useAuthentication();
 
     useEffect(() => {
         if (authSynced && !authenticated) {

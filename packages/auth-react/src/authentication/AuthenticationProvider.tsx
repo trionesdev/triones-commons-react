@@ -1,24 +1,24 @@
 import React, {FC, useMemo, useState} from "react";
-import {AuthContext} from "./context";
+import {AuthenticationContext} from "./context";
 
 type AuthProviderProps = {
     children: React.ReactElement;
     /**
      * 认证请求, 可以根据token去获取当前用户信息，如果没有token可以直接返回null
      */
-    authRequest?: () => Promise<any>;
+    authenticationRequest?: () => Promise<any>;
     onUnAuthenticated?: () => void;
     onSignOut?: () => void;
 };
 
-export const AuthProvider: FC<AuthProviderProps> = ({children, authRequest, onUnAuthenticated, onSignOut}) => {
-    const [authSynced, setAuthSynced] = useState(false);
+export const AuthenticationProvider: FC<AuthProviderProps> = ({children, authenticationRequest, onUnAuthenticated, onSignOut}) => {
+    const [authenticationSynced, setAuthenticatedSynced] = useState(false);
     const [authenticated, setAuthenticated] = useState(false);
     const [actor, setActor] = useState<any>();
 
     useMemo(() => {
-        if (authRequest) {
-            authRequest()
+        if (authenticationRequest) {
+            authenticationRequest()
                 .then((res) => {
                     setAuthenticated(!!res);
                     setActor(res || null);
@@ -28,18 +28,18 @@ export const AuthProvider: FC<AuthProviderProps> = ({children, authRequest, onUn
                     setActor(null);
                 })
                 .finally(() => {
-                    setAuthSynced(true);
+                    setAuthenticatedSynced(true);
                 });
         } else {
-            setAuthSynced(true);
+            setAuthenticatedSynced(true);
             setAuthenticated(false);
         }
-    }, [authRequest]);
+    }, [authenticationRequest]);
 
 
     const handleSetActor = (actor: any) => {
         setAuthenticated(!!actor)
-        setAuthSynced(true)
+        setAuthenticatedSynced(true)
         setActor(actor);
     };
 
@@ -47,16 +47,16 @@ export const AuthProvider: FC<AuthProviderProps> = ({children, authRequest, onUn
         if (onSignOut) {
             onSignOut()
         } else {
-            setAuthSynced(false)
+            setAuthenticatedSynced(false)
             setAuthenticated(false)
             setActor(null)
         }
     }
 
     return (
-        <AuthContext.Provider
+        <AuthenticationContext.Provider
             value={{
-                authSynced,
+                authenticationSynced,
                 authenticated,
                 actor,
                 setActor: handleSetActor,
@@ -64,6 +64,6 @@ export const AuthProvider: FC<AuthProviderProps> = ({children, authRequest, onUn
                 signOut: handleSignOut
             }}>
             {children}
-        </AuthContext.Provider>
+        </AuthenticationContext.Provider>
     );
 };

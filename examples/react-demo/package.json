@@ -10,9 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@trionesdev/commons-react": "workspace:*",
+    "@trionesdev/auth-react": "workspace:*",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router": "^7.2.6"
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",

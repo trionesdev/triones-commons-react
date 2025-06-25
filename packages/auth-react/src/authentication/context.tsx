@@ -1,10 +1,10 @@
 import {createContext} from "react";
 
-export interface AuthContextProps {
+export interface AuthenticationContextProps {
     /**
      * 认证是否同步
      */
-    authSynced?: boolean;
+    authenticationSynced?: boolean;
     /**
      * 是否已认证
      */
@@ -21,4 +21,4 @@ export interface AuthContextProps {
     signOut?: () => void;
 }
 
-export const AuthContext = createContext<AuthContextProps>({});
+export const AuthenticationContext = createContext<AuthenticationContextProps>({});

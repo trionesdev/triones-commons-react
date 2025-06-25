@@ -1,8 +1,9 @@
-import {createHashRouter, RouteObject, RouterProvider} from "@trionesdev/commons-react/src";
+import {createHashRouter, RouteObject} from "@trionesdev/auth-react/src";
 import {SignInPage} from "./SignInPage";
 import {DashboardPage} from "./DashboardPage";
 import {SecurityPage} from "./SecurityPage";
 import {PermissionPage} from "./PermissionPage.tsx";
+import {RouterProvider} from "react-router";
 
 export const routes: RouteObject[] = [
     {

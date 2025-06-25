@@ -1,8 +1,9 @@
-import {useAuth, useNavigate} from "@trionesdev/commons-react/src";
+import {useAuthentication,  } from "@trionesdev/auth-react/src";
+import {useNavigate} from "react-router";
 
 export const SignInPage = () => {
     const navigate = useNavigate()
-    const {setActor} = useAuth();
+    const {setActor} = useAuthentication();
     return <div>
         <h1 style={{
             textAlign: "center"
