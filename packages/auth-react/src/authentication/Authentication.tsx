@@ -5,15 +5,15 @@ type AuthenticationProps = {
     children?: React.ReactElement;
 };
 export const Authentication: FC<AuthenticationProps> = ({children}) => {
-    const {authSynced, authenticated, onUnAuthenticated} = useAuthentication();
+    const {authenticationSynced, authenticated, onUnAuthenticated} = useAuthentication();
 
     useEffect(() => {
-        if (authSynced && !authenticated) {
+        if (authenticationSynced && !authenticated) {
             onUnAuthenticated?.(); //未认证时候触发
         }
         return () => {
         };
-    }, [authSynced, authenticated]);
+    }, [authenticationSynced, authenticated]);
 
-    return authSynced && authenticated ? <>{children}</> : null;
+    return authenticationSynced && authenticated ? <>{children}</> : null;
 };
