@@ -9,7 +9,7 @@
     "build": "father build",
     "build:deps": "father prebundle",
     "prepublishOnly": "father doctor && npm run build",
-    "publish": "npm publish --registry=https://registry.npmjs.org/",
+    "publishBeta": "npm publish --tag beta --registry=https://registry.npmjs.org/",
     "publishOnly": "npm publish --ignore-scripts --registry=https://registry.npmjs.org/",
     "triones:publishOnly": "npm publish --ignore-scripts --registry=https://moensun-npm.pkg.coding.net/npm/moensun/"
   },

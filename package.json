@@ -12,6 +12,7 @@
     "preversion": "yarn run build",
     "version:beta": "lerna version prerelease --preid beta",
     "release:github": "ts-node scripts/release release",
+    "publish:beta": "lerna publish from-package --yes --registry=https://registry.npmjs.org/ --tag beta",
     "release:force": "lerna publish from-package --yes --registry=https://registry.npmjs.org/",
     "prelease:force": "lerna publish from-package --yes --dist-tag next",
     "release": "lerna publish --registry=https://registry.npmjs.org/",
