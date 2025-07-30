@@ -1,7 +1,6 @@
 import {Authentication, Authorization} from "@trionesdev/auth-react";
 import {TrionesRouteObject} from "./RouteObject";
 import {createBrowserRouter, createHashRouter, RouteObject} from "react-router";
-import React from "react";
 
 
 export const routesConvert = (routes: TrionesRouteObject[]): RouteObject[] => {

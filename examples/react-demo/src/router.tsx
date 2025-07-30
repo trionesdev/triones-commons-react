@@ -1,4 +1,4 @@
-import {createHashRouter, RouteObject} from "@trionesdev/auth-react/src";
+import {createHashRouter, RouteObject} from "@trionesdev/react-router-auth/src";
 import {SignInPage} from "./SignInPage";
 import {DashboardPage} from "./DashboardPage";
 import {SecurityPage} from "./SecurityPage";
