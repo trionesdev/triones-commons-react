@@ -30,13 +30,13 @@
     "react-dom": "^18.2.0"
   },
   "dependencies": {
-    "@trionesdev/auth-react": "^0.0.1-beta.10",
-    "react-router": "^7.2.6"
+    "@trionesdev/auth-react": "workspace:*",
+    "react-router": "^7.12.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "father": "^4.6.1"
   },
-  "gitHead": "4eb0e5b22e623779e1383ecffb98482124a7b690"
+  "gitHead": "07c2591c337170b19dd8704a7a491c2bd923bf07"
 }
