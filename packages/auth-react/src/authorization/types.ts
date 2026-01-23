@@ -19,6 +19,6 @@ export interface AuthorizationContextProps {
 
 
 export type UseAuthorizationProps = AuthorizationContextProps & {
-    hasAll?: (value: any | any[]) => boolean;
-    hasAny?: (value: any | any[]) => boolean;
+    hasAll: (value: any | any[]) => boolean;
+    hasAny: (value: any | any[]) => boolean;
 }

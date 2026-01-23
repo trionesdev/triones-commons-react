@@ -1,8 +1,9 @@
 import React, {FC, useEffect, useState} from "react";
-import _ from "lodash";
+
 import {AuthorizationContext} from "./context";
-import {AuthorizationResponse, Mode } from "./types";
+import {AuthorizationResponse, Mode} from "./types";
 import {useAuthentication} from "../authentication";
+import {every, includes, isArray, isEqual, some} from "lodash-es";
 
 type PermissionProviderProps = {
     children?: React.ReactNode;
@@ -26,15 +27,15 @@ type PermissionProviderProps = {
     onUnauthorized?: () => void; //未授权时的回调
 };
 export const AuthorizationProvider: FC<PermissionProviderProps> = ({
-                                                                    children,
-                                                                    authorizationRequest,
-                                                                    permissionTransform = (permission) => {
-                                                                        return permission;
-                                                                    },
-                                                                    customAuthenticate,
-                                                                    unauthorized,
-                                                                    onUnauthorized
-                                                                }) => {
+                                                                       children,
+                                                                       authorizationRequest,
+                                                                       permissionTransform = (permission) => {
+                                                                           return permission;
+                                                                       },
+                                                                       customAuthenticate,
+                                                                       unauthorized,
+                                                                       onUnauthorized
+                                                                   }) => {
     const {authenticationSynced, authenticated} = useAuthentication(); //鉴权是否同步
     const [authorizationSynced, setAuthorizationSynced] = useState(false); //策略是否同步
     const [master, setMaster] = useState(false);
@@ -55,27 +56,34 @@ export const AuthorizationProvider: FC<PermissionProviderProps> = ({
         } else {
             let permissionFiler = permissionTransform(permissionFilter);
 
-            if (_.isArray(permissionFilter)) {
+            if (isArray(permissionFilter)) {
                 if (mode == 'and') {
-                    return _.every(permissionFilter, item => {
-                        return _.some(permissions, (permission: any) => {
-                            return _.isEqual(permission, item);
+                    return every(permissionFilter, item => {
+                        return some(permissions, (permission: any) => {
+                            return isEqual(permission, item);
                         })
                     });
                 } else if (mode == 'or') {
-                    return _.some(permissionFilter, item => {
-                        return _.includes(permissions, item)
+                    return some(permissionFilter, item => {
+                        return includes(permissions, item)
                     });
                 }
             } else {
-                return _.some(permissions, (permission: any) => {
-                    return _.isEqual(permission, permissionFiler);
+                return some(permissions, (permission: any) => {
+                    return isEqual(permission, permissionFiler);
                 });
             }
             return false;
         }
 
     };
+
+    const handleHasAll = (permissionFilter: any | any[]) => {
+        return handleAuthenticate(permissionFilter, 'and');
+    }
+    const handleHasAny = (permissionFilter: any | any[]) => {
+        return handleAuthenticate(permissionFilter, 'or');
+    }
 
     useEffect(() => {
         if (authenticationSynced && authenticated) {
@@ -104,7 +112,9 @@ export const AuthorizationProvider: FC<PermissionProviderProps> = ({
                 permissions,
                 setPermissions,
                 unauthorized,
-                onUnauthorized
+                onUnauthorized,
+                hasAll: handleHasAll,
+                hasAny: handleHasAny
             }}>
             {children}
         </AuthorizationContext.Provider>
