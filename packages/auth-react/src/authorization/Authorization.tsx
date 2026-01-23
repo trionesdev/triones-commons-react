@@ -30,10 +30,14 @@ export const Authorization: FC<AuthorizationProps> = ({
         return null
     } else {
         let authorized: boolean
-        if (authenticate) {
-            authorized = authenticate?.(authorization.permissions)
+        if (authorization.master) {
+            authorized = true
         } else {
-            authorized = authorization.authenticate?.(value!,  mode) || false
+            if (authenticate) {
+                authorized = authenticate?.(authorization.permissions)
+            } else {
+                authorized = authorization.authenticate?.(value!, mode) || false
+            }
         }
         if (authorized) {
             return <>{children}</>

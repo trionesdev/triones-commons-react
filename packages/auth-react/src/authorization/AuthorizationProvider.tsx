@@ -51,6 +51,9 @@ export const AuthorizationProvider: FC<PermissionProviderProps> = ({
         if (!authorizationSynced) {
             return false;
         }
+        if (master){
+            return true;
+        }
         if (customAuthenticate) {
             return customAuthenticate(permissionFilter, permissions || [], mode);
         } else {
