@@ -1,6 +1,6 @@
 {
   "name": "@trionesdev/auth-react",
-  "version": "0.0.1-beta.9",
+  "version": "0.0.1-beta.10",
   "description": "triones auth react",
   "module": "dist/esm/index.js",
   "types": "dist/esm/index.d.ts",
@@ -26,9 +26,9 @@
     "access": "public"
   },
   "peerDependencies": {
+    "lodash-es": "^4.17.21",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "lodash-es": "^4.17.21"
+    "react-dom": "^18.2.0"
   },
   "dependencies": {
     "lodash-es": "^4.17.21"
