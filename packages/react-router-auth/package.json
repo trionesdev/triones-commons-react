@@ -1,6 +1,6 @@
 {
   "name": "@trionesdev/react-router-auth",
-  "version": "0.0.1-beta.10",
+  "version": "0.0.1-beta.11",
   "description": "react-router with auth",
   "main": "dist/esm/index.js",
   "types": "dist/esm/index.d.ts",
