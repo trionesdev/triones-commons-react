@@ -27,8 +27,8 @@ importers:
         specifier: ^18.2.0
         version: 18.3.1(react@18.3.1)
       react-router:
-        specifier: ^7.2.6
-        version: 7.6.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: 7.12.0
+        version: 7.12.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
     devDependencies:
       '@eslint/js':
         specifier: ^9.19.0
@@ -92,8 +92,8 @@ importers:
   packages/react-router-auth:
     dependencies:
       '@trionesdev/auth-react':
-        specifier: 0.0.1-beta.9
-        version: 0.0.1-beta.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: workspace:*
+        version: link:../auth-react
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -101,8 +101,8 @@ importers:
         specifier: ^18.2.0
         version: 18.3.1(react@18.3.1)
       react-router:
-        specifier: ^7.2.6
-        version: 7.6.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^7.12.0
+        version: 7.13.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
     devDependencies:
       '@types/react':
         specifier: ^18.0.28
@@ -1432,12 +1432,6 @@ packages:
 
   '@swc/types@0.1.23':
     resolution: {integrity: sha512-u1iIVZV9Q0jxY+yM2vw/hZGDNudsN85bBpTqzAQ9rzkxW9D+e3aEM4Han+ow518gSewkXgjmEK0BD79ZcNVgPw==}
-
-  '@trionesdev/auth-react@0.0.1-beta.9':
-    resolution: {integrity: sha512-BPpJPTbIT49ZqwVjAT9MqMRp16pSzhLi0TZOAFZ7TtJLUKsW+17OemmRydSxI3A2Qc7ZG3xk0G1stUXbDe/RIg==}
-    peerDependencies:
-      react: ^18.2.0
-      react-dom: ^18.2.0
 
   '@trysound/sax@0.2.0':
     resolution: {integrity: sha512-L7z9BgrNEcYyUYtF+HaEfiS5ebkh9jXqbszz7pC0hRBPaatV0XjSD3+eHrpqFemQfgwiFF0QPIarnIihIDn7OA==}
@@ -4601,8 +4595,18 @@ packages:
     resolution: {integrity: sha512-wViHqhAd8OHeLS/IRMJjTSDHF3U9eWi62F/MledQGPdJGDhodXJ9PBLNGr6WWL7qlH12Mt3TyTpbS+hGXMjCzQ==}
     engines: {node: '>=0.10.0'}
 
-  react-router@7.6.2:
-    resolution: {integrity: sha512-U7Nv3y+bMimgWjhlT5CRdzHPu2/KVmqPwKUCChW8en5P3znxUqwlYFlbmyj8Rgp1SF6zs5X4+77kBVknkg6a0w==}
+  react-router@7.12.0:
+    resolution: {integrity: sha512-kTPDYPFzDVGIIGNLS5VJykK0HfHLY5MF3b+xj0/tTyNYL1gF1qs7u67Z9jEhQk2sQ98SUaHxlG31g1JtF7IfVw==}
+    engines: {node: '>=20.0.0'}
+    peerDependencies:
+      react: '>=18'
+      react-dom: '>=18'
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
+
+  react-router@7.13.0:
+    resolution: {integrity: sha512-PZgus8ETambRT17BUm/LL8lX3Of+oiLaPuVTRH3l1eLvSPpKO3AvhAEb5N7ihAFZQrYDqkvvWfFh9p0z9VsjLw==}
     engines: {node: '>=20.0.0'}
     peerDependencies:
       react: '>=18'
@@ -6809,12 +6813,6 @@ snapshots:
   '@swc/types@0.1.23':
     dependencies:
       '@swc/counter': 0.1.3
-
-  '@trionesdev/auth-react@0.0.1-beta.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
-    dependencies:
-      lodash: 4.17.21
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
 
   '@trysound/sax@0.2.0': {}
 
@@ -10614,7 +10612,15 @@ snapshots:
 
   react-refresh@0.14.0: {}
 
-  react-router@7.6.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  react-router@7.12.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+    dependencies:
+      cookie: 1.0.2
+      react: 18.3.1
+      set-cookie-parser: 2.7.1
+    optionalDependencies:
+      react-dom: 18.3.1(react@18.3.1)
+
+  react-router@7.13.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       cookie: 1.0.2
       react: 18.3.1

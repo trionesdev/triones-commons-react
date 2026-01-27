@@ -1,4 +1,4 @@
-import React, {FC, useMemo, useState} from "react";
+import React, {FC, useEffect, useState} from "react";
 import {AuthenticationContext} from "./context";
 
 type AuthProviderProps = {
@@ -11,59 +11,64 @@ type AuthProviderProps = {
     onSignOut?: () => void;
 };
 
-export const AuthenticationProvider: FC<AuthProviderProps> = ({children, authenticationRequest, onUnAuthenticated, onSignOut}) => {
-    const [authenticationSynced, setAuthenticatedSynced] = useState(false);
-    const [authenticated, setAuthenticated] = useState(false);
+export const AuthenticationProvider: FC<AuthProviderProps> = ({
+                                                                  children,
+                                                                  authenticationRequest,
+                                                                  onUnAuthenticated,
+                                                                  onSignOut
+                                                              }) => {
+    const [authenticationInfo, setAuthenticationInfo] = useState<{ authenticationSynced: boolean; authenticated: boolean }>({
+        authenticationSynced: false,
+        authenticated: false
+    })
     const [actor, setActor] = useState<any>();
 
-    useMemo(() => {
+    useEffect(() => {
         if (authenticationRequest) {
+            debugger
+            if (authenticationInfo.authenticationSynced) {
+                setAuthenticationInfo({ ...authenticationInfo, authenticationSynced: false });
+            }
             authenticationRequest()
                 .then((res) => {
-                    setAuthenticated(!!res);
+                    setAuthenticationInfo({ authenticationSynced: true, authenticated: Boolean(res) });
                     setActor(res || null);
                 })
                 .catch(() => {
-                    setAuthenticated(false);
+                    setAuthenticationInfo({ authenticationSynced: true, authenticated: false });
                     setActor(null);
-                })
-                .finally(() => {
-                    setAuthenticatedSynced(true);
-                });
+                }) ;
         } else {
-            setAuthenticatedSynced(true);
-            setAuthenticated(false);
+            setAuthenticationInfo({
+                authenticationSynced: true,
+                authenticated: false
+            })
         }
     }, [authenticationRequest]);
 
-
     const handleSetActor = (actor: any) => {
-        setAuthenticated(!!actor)
-        setAuthenticatedSynced(true)
+        setAuthenticationInfo({ authenticationSynced: true, authenticated: Boolean(actor) });
         setActor(actor);
     };
 
     const handleSignOut = () => {
+        setAuthenticationInfo({ authenticationSynced: false, authenticated: false });
+        setActor(null)
         if (onSignOut) {
             onSignOut()
-        } else {
-            setAuthenticatedSynced(false)
-            setAuthenticated(false)
-            setActor(null)
         }
     }
 
     return (
         <AuthenticationContext.Provider
             value={{
-                authenticationSynced,
-                authenticated,
+                authenticationInfo,
                 actor,
                 setActor: handleSetActor,
                 onUnAuthenticated,
                 signOut: handleSignOut
             }}>
-            {children}
+            <div className={`auth`}>{children}</div>
         </AuthenticationContext.Provider>
     );
 };

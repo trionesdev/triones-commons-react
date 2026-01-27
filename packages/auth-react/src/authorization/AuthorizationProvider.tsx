@@ -36,7 +36,7 @@ export const AuthorizationProvider: FC<PermissionProviderProps> = ({
                                                                        unauthorized,
                                                                        onUnauthorized
                                                                    }) => {
-    const {authenticationSynced, authenticated} = useAuthentication(); //鉴权是否同步
+    const {authenticationInfo} = useAuthentication(); //鉴权是否同步
     const [authorizationSynced, setAuthorizationSynced] = useState(false); //策略是否同步
     const [master, setMaster] = useState(false);
     const [permissions, setPermissions] = useState<any[] | undefined>([]); //全部权限
@@ -89,7 +89,7 @@ export const AuthorizationProvider: FC<PermissionProviderProps> = ({
     }
 
     useEffect(() => {
-        if (authenticationSynced && authenticated) {
+        if (authenticationInfo?.authenticationSynced && authenticationInfo?.authenticated  ) {
             if (authorizationRequest) {
                 authorizationRequest?.()
                     .then((res: AuthorizationResponse) => {
@@ -102,8 +102,11 @@ export const AuthorizationProvider: FC<PermissionProviderProps> = ({
             } else {
                 setAuthorizationSynced(true);
             }
+        }else {
+            setMaster( false)
+            setPermissions( []);
         }
-    }, [authenticationSynced, authenticated]);
+    }, [authenticationInfo]);
 
     return (
         <AuthorizationContext.Provider

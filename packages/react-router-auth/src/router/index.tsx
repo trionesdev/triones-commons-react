@@ -1,13 +1,13 @@
-import {trionesCreateBrowserRouter, trionesCreateHashRouter} from "./hooks";
-import {RouteItem as RouteType, TrionesRouteObject} from "./RouteObject";
+import {trionesCreateBrowserRouter as createBrowserRouter, trionesCreateHashRouter as createHashRouter} from "./hooks";
+import {RouteItem as RouteType, TrionesRouteObject as RouteObject} from "./RouteObject";
 
 
 export type {
-    RouteType, TrionesRouteObject as RouteObject
+    RouteType, RouteObject
 };
 export {
-    trionesCreateBrowserRouter as createBrowserRouter,
-    trionesCreateHashRouter as createHashRouter,
+    createBrowserRouter,
+    createHashRouter,
 };
 
 

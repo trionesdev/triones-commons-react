@@ -1,14 +1,7 @@
 import {createContext} from "react";
 
 export interface AuthenticationContextProps {
-    /**
-     * 认证是否同步
-     */
-    authenticationSynced?: boolean;
-    /**
-     * 是否已认证
-     */
-    authenticated?: boolean;
+    authenticationInfo?: { authenticationSynced: boolean; authenticated: boolean };
     /**
      * 当前用户信息
      */
@@ -21,4 +14,6 @@ export interface AuthenticationContextProps {
     signOut?: () => void;
 }
 
-export const AuthenticationContext = createContext<AuthenticationContextProps>({});
+export const AuthenticationContext = createContext<AuthenticationContextProps>({
+
+});

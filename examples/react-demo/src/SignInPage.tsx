@@ -1,4 +1,4 @@
-import {useAuthentication,  } from "@trionesdev/auth-react/src";
+import {useAuthentication,  } from "@trionesdev/auth-react";
 import {useNavigate} from "react-router";
 
 export const SignInPage = () => {

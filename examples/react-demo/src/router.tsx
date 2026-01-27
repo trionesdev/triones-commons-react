@@ -1,4 +1,4 @@
-import {createHashRouter, RouteObject} from "@trionesdev/react-router-auth/src";
+import {createHashRouter, RouteObject} from "@trionesdev/react-router-auth";
 import {SignInPage} from "./SignInPage";
 import {DashboardPage} from "./DashboardPage";
 import {SecurityPage} from "./SecurityPage";
@@ -28,5 +28,5 @@ export const routes: RouteObject[] = [
 ]
 
 export const AppRouter = () => {
-    return <RouterProvider router={createHashRouter(routes)}/>;
+    return <RouterProvider router={createHashRouter(routes)} />;
 };
