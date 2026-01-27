@@ -68,7 +68,7 @@ export const AuthenticationProvider: FC<AuthProviderProps> = ({
                 onUnAuthenticated,
                 signOut: handleSignOut
             }}>
-            <div className={`auth`}>{children}</div>
+            {children}
         </AuthenticationContext.Provider>
     );
 };
