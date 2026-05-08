@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useRef} from "react";
+import React, {FC, useEffect} from "react";
 import {useAuthentication} from "./use-authentication";
 
 type AuthenticationProps = {
@@ -6,22 +6,12 @@ type AuthenticationProps = {
 };
 export const Authentication: FC<AuthenticationProps> = ({children}) => {
     const {authenticationInfo, onUnAuthenticated} = useAuthentication();
-    const {authenticationSynced, authenticated} = authenticationInfo || {};
-    const prevAuthenticatedRef = useRef<boolean | undefined>(undefined);
-    const onUnAuthenticatedRef = useRef(onUnAuthenticated);
 
     useEffect(() => {
-        onUnAuthenticatedRef.current = onUnAuthenticated;
-    }, [onUnAuthenticated]);
-
-    useEffect(() => {
-        const prevAuthenticated = prevAuthenticatedRef.current;
-        // 只在认证状态从 true 切换为 false 时触发，避免重复回调
-        if (authenticationSynced && prevAuthenticated === true && authenticated === false) {
-            onUnAuthenticatedRef.current?.();
+        if (authenticationInfo?.authenticationSynced && !authenticationInfo?.authenticated) {
+            onUnAuthenticated?.(); //未认证时候触发
         }
-        prevAuthenticatedRef.current = authenticated;
-    }, [authenticationSynced, authenticated]);
+    }, [authenticationInfo?.authenticated, authenticationInfo?.authenticationSynced, onUnAuthenticated]);
 
-    return (authenticationSynced && authenticated) ? <>{children}</> : null;
+    return (authenticationInfo?.authenticationSynced && authenticationInfo?.authenticated) ? <>{children}</> : null;
 };

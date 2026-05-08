@@ -1,8 +1,7 @@
-import {AuthenticationContext, AuthenticationContextProps} from "./context";
 import {useContext} from "react";
+import {AuthenticationContext, AuthenticationContextProps} from "./context";
 
-export const useAuthentication = <TActor = unknown>() => {
-    const {authenticationInfo, actor, setActor, onUnAuthenticated, signOut} =
-        useContext(AuthenticationContext) as AuthenticationContextProps<TActor>;
+export const useAuthentication = (): AuthenticationContextProps => {
+    const {authenticationInfo, actor, setActor, onUnAuthenticated, signOut} = useContext(AuthenticationContext);
     return {authenticationInfo, actor, setActor, onUnAuthenticated, signOut};
 };
