@@ -5,7 +5,7 @@ import {AuthenticationProvider, AuthorizationProvider} from "@trionesdev/auth-re
 function App() {
     return (
         <AuthenticationProvider
-            authenticationRequest={() => Promise.resolve(false)}
+            actorRequest={() => Promise.resolve(false)}
             onUnAuthenticated={() => {
                 console.log("onUnAuthenticated");
                 window.location.href = "/#/sign-in";

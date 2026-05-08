@@ -1,19 +1,19 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useMemo, useState} from "react";
 import {AuthenticationContext} from "./context";
 
 type AuthProviderProps<TActor = unknown> = {
-    children: React.ReactElement;
+    children: React.ReactNode;
     /**
      * 认证请求, 可以根据token去获取当前用户信息，如果没有token可以直接返回null
      */
-    authenticationRequest?: () => Promise<TActor | null>;
+    actorRequest?: () => Promise<TActor | null>;
     onUnAuthenticated?: () => void;
     onSignOut?: () => void;
 };
 
 export const AuthenticationProvider = <TActor = unknown,>({
                                                             children,
-                                                            authenticationRequest,
+                                                            actorRequest,
                                                             onUnAuthenticated,
                                                             onSignOut
                                                         }: AuthProviderProps<TActor>) => {
@@ -24,49 +24,55 @@ export const AuthenticationProvider = <TActor = unknown,>({
     const [actor, setActor] = useState<TActor | null>(null);
 
     useEffect(() => {
-        if (authenticationRequest) {
-            if (authenticationInfo.authenticationSynced) {
-                setAuthenticationInfo({ ...authenticationInfo, authenticationSynced: false });
-            }
-            authenticationRequest()
-                .then((res) => {
-                    setAuthenticationInfo({ authenticationSynced: true, authenticated: Boolean(res) });
-                    setActor(res || null);
-                })
-                .catch(() => {
-                    setAuthenticationInfo({ authenticationSynced: true, authenticated: false });
-                    setActor(null);
-                }) ;
-        } else {
-            setAuthenticationInfo({
-                authenticationSynced: true,
-                authenticated: false
-            })
+        let cancelled = false;
+        if (!actorRequest) {
+            setAuthenticationInfo({ authenticationSynced: true, authenticated: false });
+            setActor(null);
+            return;
         }
-    }, [authenticationRequest]);
 
-    const handleSetActor = (nextActor: TActor | null) => {
+        setAuthenticationInfo({ authenticationSynced: false, authenticated: false });
+        actorRequest()
+            .then((res) => {
+                if (cancelled) return;
+                setAuthenticationInfo({ authenticationSynced: true, authenticated: Boolean(res) });
+                setActor(res || null);
+            })
+            .catch(() => {
+                if (cancelled) return;
+                setAuthenticationInfo({ authenticationSynced: true, authenticated: false });
+                setActor(null);
+            });
+
+        return () => {
+            cancelled = true;
+        };
+    }, [actorRequest]);
+
+    const handleSetActor = useCallback((nextActor: TActor | null) => {
         setAuthenticationInfo({ authenticationSynced: true, authenticated: Boolean(nextActor) });
         setActor(nextActor);
-    };
+    }, []);
 
-    const handleSignOut = () => {
+    const handleSignOut = useCallback(() => {
         setAuthenticationInfo({ authenticationSynced: false, authenticated: false });
-        setActor(null)
+        setActor(null);
         if (onSignOut) {
-            onSignOut()
+            onSignOut();
         }
-    }
+    }, [onSignOut]);
+
+    const contextValue = useMemo(() => ({
+        authenticationInfo,
+        actor,
+        setActor: handleSetActor,
+        onUnAuthenticated,
+        signOut: handleSignOut
+    }), [authenticationInfo, actor, handleSetActor, onUnAuthenticated, handleSignOut]);
 
     return (
         <AuthenticationContext.Provider
-            value={{
-                authenticationInfo,
-                actor,
-                setActor: handleSetActor,
-                onUnAuthenticated,
-                signOut: handleSignOut
-            }}>
+            value={contextValue}>
             {children}
         </AuthenticationContext.Provider>
     );

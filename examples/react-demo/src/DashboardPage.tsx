@@ -3,7 +3,7 @@ import {Link} from "react-router";
 
 
 export const DashboardPage = () => {
-    const {actor, setActor, signOut} = useAuthentication()
+    const {actor, setActor, signOut} = useAuthentication<{ username: string }>()
 
     return <div>
         <h1>Dashboard</h1>
