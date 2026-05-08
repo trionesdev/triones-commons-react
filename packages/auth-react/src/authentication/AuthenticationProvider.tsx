@@ -1,31 +1,30 @@
-import React, {FC, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {AuthenticationContext} from "./context";
 
-type AuthProviderProps = {
+type AuthProviderProps<TActor = unknown> = {
     children: React.ReactElement;
     /**
      * 认证请求, 可以根据token去获取当前用户信息，如果没有token可以直接返回null
      */
-    authenticationRequest?: () => Promise<any>;
+    authenticationRequest?: () => Promise<TActor | null>;
     onUnAuthenticated?: () => void;
     onSignOut?: () => void;
 };
 
-export const AuthenticationProvider: FC<AuthProviderProps> = ({
-                                                                  children,
-                                                                  authenticationRequest,
-                                                                  onUnAuthenticated,
-                                                                  onSignOut
-                                                              }) => {
+export const AuthenticationProvider = <TActor = unknown,>({
+                                                            children,
+                                                            authenticationRequest,
+                                                            onUnAuthenticated,
+                                                            onSignOut
+                                                        }: AuthProviderProps<TActor>) => {
     const [authenticationInfo, setAuthenticationInfo] = useState<{ authenticationSynced: boolean; authenticated: boolean }>({
         authenticationSynced: false,
         authenticated: false
     })
-    const [actor, setActor] = useState<any>();
+    const [actor, setActor] = useState<TActor | null>(null);
 
     useEffect(() => {
         if (authenticationRequest) {
-            debugger
             if (authenticationInfo.authenticationSynced) {
                 setAuthenticationInfo({ ...authenticationInfo, authenticationSynced: false });
             }
@@ -46,9 +45,9 @@ export const AuthenticationProvider: FC<AuthProviderProps> = ({
         }
     }, [authenticationRequest]);
 
-    const handleSetActor = (actor: any) => {
-        setAuthenticationInfo({ authenticationSynced: true, authenticated: Boolean(actor) });
-        setActor(actor);
+    const handleSetActor = (nextActor: TActor | null) => {
+        setAuthenticationInfo({ authenticationSynced: true, authenticated: Boolean(nextActor) });
+        setActor(nextActor);
     };
 
     const handleSignOut = () => {

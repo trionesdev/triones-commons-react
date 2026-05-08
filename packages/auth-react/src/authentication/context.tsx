@@ -1,12 +1,12 @@
 import {createContext} from "react";
 
-export interface AuthenticationContextProps {
+export interface AuthenticationContextProps<TActor = unknown> {
     authenticationInfo?: { authenticationSynced: boolean; authenticated: boolean };
     /**
      * 当前用户信息
      */
-    actor?: any;
-    setActor?: (actor: any) => void;
+    actor?: TActor | null;
+    setActor?: (actor: TActor | null) => void;
     /**
      * 未认证时的回调
      */
@@ -14,6 +14,6 @@ export interface AuthenticationContextProps {
     signOut?: () => void;
 }
 
-export const AuthenticationContext = createContext<AuthenticationContextProps>({
+export const AuthenticationContext = createContext<AuthenticationContextProps<any>>({
 
 });
