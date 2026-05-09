@@ -5,13 +5,13 @@ export type AuthenticationInfo = {
     authenticated: boolean;
 };
 
-export interface AuthenticationContextProps {
+export interface AuthenticationContextValue<TActor = any> {
     authenticationInfo?: AuthenticationInfo;
     /**
      * 当前用户信息
      */
-    actor?: any;
-    setActor?: (actor: any) => void;
+    actor?: TActor;
+    setActor?: (actor: TActor) => void;
     /**
      * 未认证时的回调
      */
@@ -19,6 +19,4 @@ export interface AuthenticationContextProps {
     signOut?: () => void;
 }
 
-export const AuthenticationContext = createContext<AuthenticationContextProps>({
-
-});
+export const AuthenticationContext = createContext<AuthenticationContextValue<any>>({});

@@ -1,27 +1,27 @@
 import React, {FC, useCallback, useEffect, useMemo, useState} from "react";
 import {AuthenticationContext, AuthenticationInfo} from "./context";
 
-type AuthProviderProps = {
+type AuthProviderProps<T = any> = {
     children: React.ReactNode;
     /**
      * 认证请求, 可以根据token去获取当前用户信息，如果没有token可以直接返回null
      */
-    actorRequest?: () => Promise<any>;
+    actorRequest?: () => Promise<T>;
     onUnAuthenticated?: () => void;
     onSignOut?: () => void;
 };
 
-export const AuthenticationProvider: FC<AuthProviderProps> = ({
-                                                                  children,
-                                                                  actorRequest,
-                                                                  onUnAuthenticated,
-                                                                  onSignOut
-                                                              }) => {
+export function AuthenticationProvider<T = any>({
+                                                        children,
+                                                        actorRequest,
+                                                        onUnAuthenticated,
+                                                        onSignOut
+                                                    }: AuthProviderProps<T>) {
     const [authenticationInfo, setAuthenticationInfo] = useState<AuthenticationInfo>({
         authenticationSynced: false,
         authenticated: false
     });
-    const [actor, setActor] = useState<any>();
+    const [actor, setActor] = useState<T | undefined>();
 
     useEffect(() => {
         if (!actorRequest) {
@@ -29,7 +29,7 @@ export const AuthenticationProvider: FC<AuthProviderProps> = ({
                 authenticationSynced: true,
                 authenticated: false
             });
-            setActor(null);
+            setActor(undefined);
             return;
         }
 
@@ -41,15 +41,15 @@ export const AuthenticationProvider: FC<AuthProviderProps> = ({
                 if (cancelled) {
                     return;
                 }
-                setAuthenticationInfo({ authenticationSynced: true, authenticated: Boolean(res) });
-                setActor(res || null);
+                setAuthenticationInfo({authenticationSynced: true, authenticated: Boolean(res)});
+                setActor(res || undefined);
             })
             .catch(() => {
                 if (cancelled) {
                     return;
                 }
-                setAuthenticationInfo({ authenticationSynced: true, authenticated: false });
-                setActor(null);
+                setAuthenticationInfo({authenticationSynced: true, authenticated: false});
+                setActor(undefined);
             });
 
         return () => {
@@ -57,14 +57,14 @@ export const AuthenticationProvider: FC<AuthProviderProps> = ({
         };
     }, [actorRequest]);
 
-    const handleSetActor = useCallback((actor: any) => {
-        setAuthenticationInfo({ authenticationSynced: true, authenticated: Boolean(actor) });
+    const handleSetActor = useCallback((actor: T) => {
+        setAuthenticationInfo({authenticationSynced: true, authenticated: Boolean(actor)});
         setActor(actor);
     }, []);
 
     const handleSignOut = useCallback(() => {
-        setAuthenticationInfo({ authenticationSynced: false, authenticated: false });
-        setActor(null);
+        setAuthenticationInfo({authenticationSynced: false, authenticated: false});
+        setActor(undefined);
         onSignOut?.();
     }, [onSignOut]);
 

@@ -4,7 +4,7 @@ import {AuthenticationProvider, AuthorizationProvider} from "@trionesdev/auth-re
 
 function App() {
     return (
-        <AuthenticationProvider
+        <AuthenticationProvider<any>
             actorRequest={() => Promise.resolve(false)}
             onUnAuthenticated={() => {
                 console.log("onUnAuthenticated");
