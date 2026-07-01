@@ -12,11 +12,11 @@ type AuthProviderProps<T = any> = {
 };
 
 export function AuthenticationProvider<T = any>({
-                                                        children,
-                                                        actorRequest,
-                                                        onUnAuthenticated,
-                                                        onSignOut
-                                                    }: AuthProviderProps<T>) {
+                                                    children,
+                                                    actorRequest,
+                                                    onUnAuthenticated,
+                                                    onSignOut
+                                                }: AuthProviderProps<T>) {
     const [authenticationInfo, setAuthenticationInfo] = useState<AuthenticationInfo>({
         authenticationSynced: false,
         authenticated: false
@@ -82,4 +82,4 @@ export function AuthenticationProvider<T = any>({
             {children}
         </AuthenticationContext.Provider>
     );
-};
+}
