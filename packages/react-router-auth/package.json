@@ -26,16 +26,16 @@
     "access": "public"
   },
   "peerDependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
   },
   "dependencies": {
     "@trionesdev/auth-react": "workspace:*",
-    "react-router": "^7.12.0"
+    "react-router": "^8.1.0"
   },
   "devDependencies": {
-    "@types/react": "^18.0.28",
-    "@types/react-dom": "^18.0.11",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
     "father": "^4.6.1"
   },
   "gitHead": "07c2591c337170b19dd8704a7a491c2bd923bf07"

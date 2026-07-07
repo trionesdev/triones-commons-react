@@ -1,6 +1,6 @@
 # React 公共库
 
-[React 公共库](packages/commons-react/README.md)
+[React 公共库](packages/auth-react/README.md)
 
 - 认证
 - 鉴权

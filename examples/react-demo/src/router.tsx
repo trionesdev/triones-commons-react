@@ -3,7 +3,7 @@ import {SignInPage} from "./SignInPage";
 import {DashboardPage} from "./DashboardPage";
 import {SecurityPage} from "./SecurityPage";
 import {PermissionPage} from "./PermissionPage.tsx";
-import {RouterProvider} from "react-router";
+import {RouterProvider} from "react-router/dom";
 
 export const routes: RouteObject[] = [
     {
